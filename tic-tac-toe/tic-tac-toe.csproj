@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}</ProjectGuid>
+    <ProjectGuid>{BB4541C5-56A0-463E-BABF-4C20DB81A816}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CredoProject</RootNamespace>
-    <AssemblyName>CredoProject</AssemblyName>
+    <RootNamespace>tic_tac_toe</RootNamespace>
+    <AssemblyName>tic-tac-toe</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
