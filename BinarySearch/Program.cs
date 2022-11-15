@@ -15,8 +15,7 @@ namespace BinarySearch
 
             Console.WriteLine(BinarySearch(array, target));
 
-            double[] arr = new double[] { 1, 1, 5, 4, 9, 9.8 };
-            Console.WriteLine(SumArray(arr));
+            
             Console.ReadLine();
         }
         public static int BinarySearch(int[] nums, int target)
@@ -44,23 +43,6 @@ namespace BinarySearch
             }
             // End Condition: left > right
             return -1;
-        }
-        public static double SumArray(double[] array)
-        {
-            double sum = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array.Length > 0)
-                {
-                    return sum += array[i];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            return sum;
-        }
-        
+        }        
     }
 }
