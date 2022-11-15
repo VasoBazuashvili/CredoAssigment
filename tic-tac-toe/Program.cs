@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using System.Linq;
+
 namespace TIC_TAC_TOE
 {
     class Program
