@@ -11,8 +11,7 @@ namespace BurgerBuilder
     internal class Program
     {
         static void Main(string[] args)
-        {
-            Console.WriteLine("hello");
+        { 
             BurgerBuilder burgerBuilder = new BurgerBuilder();
             var burger1 =  burgerBuilder.Start().WithBun().WithLettuce().WithCheese().WithPickles().Build();
             Console.ReadLine();
