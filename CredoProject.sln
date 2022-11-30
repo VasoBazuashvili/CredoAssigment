@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "CredoProject\Calculator.csproj", "{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tic-tac-toe", "tic-tac-toe\tic-tac-toe.csproj", "{BB4541C5-56A0-463E-BABF-4C20DB81A816}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "BinarySearch\BinarySearch.csproj", "{9FA4C089-2025-4670-8F4C-35E85727D421}"
@@ -17,16 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurgerBuilder", "BurgerBuil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{1D6ACBD8-AC3A-41AB-BC44-8F1773F105AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{62D2F5A1-9152-4FC1-833D-F5369427D590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB5E5EA7-3E65-45C5-AD9E-AE06D12B0778}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB4541C5-56A0-463E-BABF-4C20DB81A816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB4541C5-56A0-463E-BABF-4C20DB81A816}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB4541C5-56A0-463E-BABF-4C20DB81A816}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{1D6ACBD8-AC3A-41AB-BC44-8F1773F105AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D6ACBD8-AC3A-41AB-BC44-8F1773F105AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D6ACBD8-AC3A-41AB-BC44-8F1773F105AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

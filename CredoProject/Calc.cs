@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace Calculator
+namespace CredoProject
 {
-    internal class Calc
+    class Calc
     {
         public double Solve(string equation)
         {
@@ -22,7 +22,7 @@ namespace Calculator
             return result;
         }
 
-
+        
     }
 
     public class Operation
