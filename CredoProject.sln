@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurgerBuilder", "BurgerBuil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{1D6ACBD8-AC3A-41AB-BC44-8F1773F105AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{62D2F5A1-9152-4FC1-833D-F5369427D590}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{62D2F5A1-9152-4FC1-833D-F5369427D590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Footbal Data", "Footbal Data\Footbal Data.csproj", "{8B388E26-9274-4376-BCF3-AE13CE059748}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D2F5A1-9152-4FC1-833D-F5369427D590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B388E26-9274-4376-BCF3-AE13CE059748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B388E26-9274-4376-BCF3-AE13CE059748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B388E26-9274-4376-BCF3-AE13CE059748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B388E26-9274-4376-BCF3-AE13CE059748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
