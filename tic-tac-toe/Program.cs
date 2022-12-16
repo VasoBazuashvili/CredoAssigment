@@ -1,130 +1,97 @@
 ﻿using System;
-using System.Threading;
-using System.Linq;
 
-namespace TIC_TAC_TOE
+namespace TicTacToe
 {
     class Program
     {
-        private static readonly char[] Arr = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        private static int _player = 1;
-        private static int _choice;
-        private static int _flag = 0;
-        private static void Main(string[] args)
+        static char[] arr = { '0', '1', '2', '3', '4', '5', '6', '7', '8' };
+        static int player = 1;
+        static int choice;
+        static int flag = 0;
+
+        static void Main(string[] args)
         {
             do
             {
                 Console.Clear();
-
-                Console.WriteLine("Player1 : X and Player2 : O");
+                Console.WriteLine("Player 1: X and Player 2: O");
                 Console.WriteLine("\n");
-                Console.WriteLine(_player % 2 == 0 ? "Player 2 Chance" : "Player 1 Chance");
+                if (player % 2 == 0)
+                {
+                    Console.WriteLine("Player 2's turn");
+                }
+                else
+                {
+                    Console.WriteLine("Player 1's turn");
+                }
                 Console.WriteLine("\n");
                 Board();
-                _choice = int.Parse(Console.ReadLine());
+                choice = int.Parse(Console.ReadLine());
 
-                if (Arr[_choice] != 'X' && Arr[_choice] != 'O')
+                // checking if the cell is not already marked
+                if (arr[choice] != 'X' && arr[choice] != 'O')
                 {
-                    if (_player % 2 == 0)
+                    if (player % 2 == 0)
                     {
-                        Arr[_choice] = 'O';
-                        _player++;
+                        arr[choice] = 'O';
+                        player++;
                     }
                     else
                     {
-                        Arr[_choice] = 'X';
-                        _player++;
+                        arr[choice] = 'X';
+                        player++;
                     }
                 }
                 else
-
                 {
-                    Console.WriteLine("Sorry the row {0} is already marked with {1}", _choice, Arr[_choice]);
+                    Console.WriteLine("Sorry the cell is already marked with " + arr[choice]);
                     Console.WriteLine("\n");
-                    Console.WriteLine("Please wait 2 second board is loading again.....");
-                    Thread.Sleep(2000);
+                    Console.WriteLine("Please wait 2 seconds board is loading again.....");
+                    Console.ReadKey();
                 }
-                _flag = CheckWin();
-            }
-            while (_flag != 1 && _flag != -1);
+                flag = CheckWin();
+            } while (flag != 1 && flag != -1); 
 
             Console.Clear();
             Board();
-            if (_flag == 1)
 
+            if (flag == 1)
             {
-                Console.WriteLine("Player {0} has won", (_player % 2) + 1);
+                Console.WriteLine("Player {0} has won", (player % 2) + 1);
             }
             else
             {
                 Console.WriteLine("Draw");
             }
+
             Console.ReadLine();
         }
+
+        
         private static void Board()
         {
-
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Arr[1], Arr[2], Arr[3]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}", arr[0], arr[1], arr[2]);
             Console.WriteLine("_____|_____|_____ ");
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Arr[4], Arr[5], Arr[6]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}", arr[3], arr[4], arr[5]);
             Console.WriteLine("_____|_____|_____ ");
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Arr[7], Arr[8], Arr[9]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}", arr[6], arr[7], arr[8]);
             Console.WriteLine("     |     |      ");
         }
+
+        
         private static int CheckWin()
         {
             #region Horzontal Winning Condtion
-            if (Arr[1] == Arr[2] && Arr[2] == Arr[3])
+            if (arr[0] == arr[1] && arr[1] == arr[2])
             {
                 return 1;
             }
-            else if (Arr[4] == Arr[5] && Arr[5] == Arr[6])
-            {
-                return 1;
-            }
-            else if (Arr[6] == Arr[7] && Arr[7] == Arr[8])
-            {
-                return 1;
-            }
-            #endregion
-            #region vertical Winning Condtion
-            else if (Arr[1] == Arr[4] && Arr[4] == Arr[7])
-            {
-                return 1;
-            }
-            else if (Arr[2] == Arr[5] && Arr[5] == Arr[8])
-            {
-                return 1;
-            }
-            else if (Arr[3] == Arr[6] && Arr[6] == Arr[9])
-            {
-                return 1;
-            }
-            #endregion
-            #region Diagonal Winning Condition
-            else if (Arr[1] == Arr[5] && Arr[5] == Arr[9])
-            {
-                return 1;
-            }
-            else if (Arr[3] == Arr[5] && Arr[5] == Arr[7])
-            {
-                return 1;
-            }
-            #endregion
-            #region Checking For Draw
+            return 0;
 
-            else if (Arr[1] != '1' && Arr[2] != '2' && Arr[3] != '3' && Arr[4] != '4' && Arr[5] != '5' && Arr[6] != '6' && Arr[7] != '7' && Arr[8] != '8' && Arr[9] != '9')
-            {
-                return -1;
-            }
             #endregion
-            else
-            {
-                return 0;
-            }
         }
     }
 }
