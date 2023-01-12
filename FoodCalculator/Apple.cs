@@ -10,6 +10,7 @@ namespace FoodCalculator
     {
         public Apple() : base(95, 0.3)
         {
+
         }
     }
 }

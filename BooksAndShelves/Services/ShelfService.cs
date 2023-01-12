@@ -12,7 +12,6 @@ namespace BooksAndShelves.Services
         static ShelfService()
         {
             Shelves = new List<Shelf>();
-
         }
 
         public Shelf Create(CreateShelfRequest request)
@@ -76,7 +75,7 @@ namespace BooksAndShelves.Services
                 ShelfId = request.ShelfId
             };
             var shelf = Shelves.Find(s => s.Id == book.ShelfId);
-            shelf.Books.Add(book);
+            shelf?.Books.Add(book);
             return book;
 
         }
@@ -107,8 +106,6 @@ namespace BooksAndShelves.Services
                         book.ShelfId = request.NewShelfID;
                         shelf.Books.Remove(book);
                         NewShelf.Books.Add(book);
-
-
                     }
                 }
             }

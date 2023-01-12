@@ -31,9 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator2", "Calculator2\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator test", "Calculator test\Calculator test.csproj", "{D3AAACFA-AB82-44AE-BB93-4B5B465D69A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodCalculator", "FoodCalculator\FoodCalculator.csproj", "{7947B906-9D05-4341-9410-0C59EE48A21A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodCalculator", "FoodCalculator\FoodCalculator.csproj", "{7947B906-9D05-4341-9410-0C59EE48A21A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodCalcTest", "FoodCalcTest\FoodCalcTest.csproj", "{E280C1B0-822C-4BCA-896C-457A93828546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodCalcTest", "FoodCalcTest\FoodCalcTest.csproj", "{E280C1B0-822C-4BCA-896C-457A93828546}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksAndShelves", "BooksAndShelves\BooksAndShelves.csproj", "{ED077E17-7B1E-4C64-AF29-08D2D44F2534}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp Api", "ToddApp Api\TodoApp Api.csproj", "{0B099EEC-0D0D-4759-9633-7CAF7FDC7874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +109,14 @@ Global
 		{E280C1B0-822C-4BCA-896C-457A93828546}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E280C1B0-822C-4BCA-896C-457A93828546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E280C1B0-822C-4BCA-896C-457A93828546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED077E17-7B1E-4C64-AF29-08D2D44F2534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED077E17-7B1E-4C64-AF29-08D2D44F2534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED077E17-7B1E-4C64-AF29-08D2D44F2534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED077E17-7B1E-4C64-AF29-08D2D44F2534}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B099EEC-0D0D-4759-9633-7CAF7FDC7874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B099EEC-0D0D-4759-9633-7CAF7FDC7874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B099EEC-0D0D-4759-9633-7CAF7FDC7874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B099EEC-0D0D-4759-9633-7CAF7FDC7874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
