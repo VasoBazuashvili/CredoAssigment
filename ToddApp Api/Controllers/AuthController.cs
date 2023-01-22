@@ -10,27 +10,24 @@ using ToddApp_Api.Repositories;
 namespace ToddApp_Api.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/[controller]")]
 	public class AuthController : ControllerBase
 	{
 		private TokenGenerator _tokenGenerator;
 		private IConfiguration _configuration;
 		private UserManager<UserEntity> _userManager;
-		private readonly AppDbContext _db;
 		private readonly ISendEmailRequestRepository _sendEmailRequestRepository;
 
 		public AuthController(
-			ISendEmailRequestRepository sendEmailRequestRepository,
 			IConfiguration configuration,
-			AppDbContext db,
+			ISendEmailRequestRepository sendEmailRequestRepository,
 			UserManager<UserEntity> userManager,
 			TokenGenerator tokenGenerator)
 		{
 			_tokenGenerator = tokenGenerator;
 			_userManager = userManager;
-			_db = db;
-			_configuration = configuration;
 			_sendEmailRequestRepository= sendEmailRequestRepository;
+			_configuration = configuration;
 		}
 
 		[HttpGet("ping")]
@@ -77,15 +74,12 @@ namespace ToddApp_Api.Controllers
 			sendEmailRequestEntity.ToAddress = request.Email;
 			sendEmailRequestEntity.Status = SendEmailRequestStatus.New;
 			sendEmailRequestEntity.CreatedAt = DateTime.Now;
-			var url = _configuration["PasswordResetUrl"]!
-			.Replace("{userId}", user.Id.ToString())
-			.Replace("{token}", token);
-			var resetUrl = $"<a href=\"{url}\">Reset password</a>";
-			sendEmailRequestEntity.Body = $"Hello, your password reset link is: {resetUrl}";
-
-			_sendEmailRequestRepository.Insert(sendEmailRequestEntity);
+			var url = _configuration["ConnectionStrings:PasswordResetUrl"]!
+				.Replace("{userId}", user.Id.ToString())
+				.Replace("{token}", token);
+			var resultUrl = $"<a href=\"{url}\">Reset Password </a>";
+			sendEmailRequestEntity.Body = $"Hello, your password reset link is: {resultUrl}";
 			await _sendEmailRequestRepository.SaveChangesAsync();
-
 			return Ok();
 		}
 
@@ -106,7 +100,7 @@ namespace ToddApp_Api.Controllers
 				return NotFound("User not found");
 			}
 
-			var resetResult = await _userManager.ResetPasswordAsync(user, request.PasswordResetToken, request.NewPassword);
+			var resetResult = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
 			//TODO: return result
 			if (!resetResult.Succeeded)
 			{
