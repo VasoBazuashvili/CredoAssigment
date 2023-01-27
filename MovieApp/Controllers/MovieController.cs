@@ -7,5 +7,7 @@ namespace MovieApp.Controllers
 	[ApiController]
 	public class MovieController : ControllerBase
 	{
+		[HttpPost("movie-add")]
+		public 
 	}
 }
