@@ -2,6 +2,7 @@
 using MovieApp.Db;
 using MovieApp.Models;
 using MovieApp.Models.Requests;
+using System.Linq;
 
 namespace MovieApp.Repository
 {
@@ -10,7 +11,7 @@ namespace MovieApp.Repository
 		Task Add(AddMovie request);
 		Task<Movie> Get(GetMovieRequest request);
 		Task<List<Movie>> Search(SearchMovie request, int pageSize, int pageIndex);
-		Task Update(UpdateMovie request);
+		Task UpdateAsync(UpdateMovie request);
 		Task Delete(DeleteMovie request);
 	}
 
@@ -57,13 +58,13 @@ namespace MovieApp.Repository
 			return entity;
 		}
 
-		public async Task Update(UpdateMovie request)
+		public async Task UpdateAsync(UpdateMovie request)
 		{
 			var movie = _db.Movies.FindAsync(request).Result;
 			if (request.Title != null) { movie.Title = request.Title; }
 			if (request.Description != null) { movie.Description = request.Description; }
-			if (request.ReleaseYear != null) { movie.MovieCreatedYear = request.ReleaseYear; }
-			if (request.Director != null) { movie.Director = request.Director; }
+			if (request?.ReleaseYear != null) { movie.MovieCreatedYear = request.ReleaseYear; }
+			if (request?.Director != null) { movie.Director = request.Director; }
 			movie.CreatedDate = DateTime.Now;
 			movie.Status = Models.Enums.MovieStatus.Active;
 			movie.Id = request.Id;
