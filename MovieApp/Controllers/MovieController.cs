@@ -19,6 +19,7 @@ namespace MovieApp.Controllers
 		[HttpGet("getMovie")]
 		public async Task<Movie> Add([FromBody] GetMovieRequest request)
 		{
+
 			return await _movieRepository.Get(request);
 		}
 
@@ -37,7 +38,7 @@ namespace MovieApp.Controllers
 		[HttpPut("updateMovie")]
 		public async Task Update([FromBody] UpdateMovie request)
 		{
-			await _movieRepository.Update(request);
+			await _movieRepository.UpdateAsync(request);
 		}
 
 		[HttpDelete("deleteMovie")]

@@ -8,7 +8,7 @@ namespace MovieApp.Repository
 {
 	public interface IMovieRepository
 	{
-		Task Add(AddMovie request);
+		Task<Movie> Add(AddMovie request);
 		Task<Movie> Get(GetMovieRequest request);
 		Task<List<Movie>> Search(SearchMovie request, int pageSize, int pageIndex);
 		Task UpdateAsync(UpdateMovie request);
@@ -22,7 +22,7 @@ namespace MovieApp.Repository
 		{
 			_db = db;
 		}
-		public async Task Add(AddMovie request)
+		public async Task<Movie> Add(AddMovie request)
 		{
 			var entity = new Movie();
 			entity.CreatedDate = DateTime.Now;
@@ -33,6 +33,8 @@ namespace MovieApp.Repository
 			entity.MovieCreatedYear = request.ReleaseYear;
 
 			await _db.Movies.AddAsync(entity);
+			await _db.SaveChangesAsync();
+			return entity;
 		}
 
 		public async Task<Movie> Get(GetMovieRequest request)
@@ -60,15 +62,19 @@ namespace MovieApp.Repository
 
 		public async Task UpdateAsync(UpdateMovie request)
 		{
-			var movie = _db.Movies.FindAsync(request).Result;
+			var movie = await _db.Movies.FirstOrDefaultAsync(m => m.Id == request.Id);
+			if (movie == null)
+			{
+				throw new DbUpdateException($"Movie with id {request.Id} not found");
+			}
 			if (request.Title != null) { movie.Title = request.Title; }
 			if (request.Description != null) { movie.Description = request.Description; }
 			if (request?.ReleaseYear != null) { movie.MovieCreatedYear = request.ReleaseYear; }
 			if (request?.Director != null) { movie.Director = request.Director; }
 			movie.CreatedDate = DateTime.Now;
 			movie.Status = Models.Enums.MovieStatus.Active;
-			movie.Id = request.Id;
 			await _db.AddAsync(movie);
+			await _db.SaveChangesAsync();
 		}
 
 		public async Task Delete(DeleteMovie request)
