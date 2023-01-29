@@ -4,6 +4,7 @@ namespace MovieApp.Models.Requests
 {
     public class DeleteMovie
     {
-        public MovieStatus Status { get; set; }
+        public int Id { get; set; }
+        //public MovieStatus Status { get; set; }
     }
 }
