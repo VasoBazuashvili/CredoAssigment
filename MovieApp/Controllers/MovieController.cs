@@ -36,9 +36,10 @@ namespace MovieApp.Controllers
 		}
 
 		[HttpPut("updateMovie")]
-		public async Task Update([FromBody] UpdateMovie request)
+		public async Task<IActionResult> Update([FromBody] UpdateMovie request)
 		{
 			await _movieRepository.UpdateAsync(request);
+			return Ok();
 		}
 
 		[HttpDelete("deleteMovie")]
