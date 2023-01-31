@@ -7,7 +7,7 @@ namespace MovieAppDatabase.Repository
 	public interface IMovieRepository
 	{
 		Task<bool> AddMovie(Movie movie);
-		Task<Movie> GetMovie(int id);
+		Task<Movie?> GetMovie(int id);
 		Task<IQueryable<Movie>> SearchMovie(string query);
 		Task<bool> UpdateMovie(int id,Movie movie);
 		Task<bool> DeleteMovie(int id);
@@ -55,7 +55,7 @@ namespace MovieAppDatabase.Repository
 			return true;
 		}
 
-		public async Task<Movie> GetMovie(int id)
+		public async Task<Movie?> GetMovie(int id)
 		{
 			return await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
 		}

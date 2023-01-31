@@ -15,7 +15,7 @@ namespace MovieAppDatabase.Controllers
 
 		[HttpPost]
 		[Route("add")]
-		public IActionResult AddMovie([FromBody] Movie movie)
+		public async Task<IActionResult> AddMovie([FromBody] Movie movie)
 		{
 			try
 			{
@@ -39,7 +39,7 @@ namespace MovieAppDatabase.Controllers
 					return BadRequest("Director is required");
 				}
 
-				_movieRepository.AddMovie(movie);
+				await _movieRepository.AddMovie(movie);
 				return Ok();
 			}
 			catch (Exception)
