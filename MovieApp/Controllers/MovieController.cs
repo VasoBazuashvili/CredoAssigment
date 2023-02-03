@@ -24,9 +24,10 @@ namespace MovieApp.Controllers
 		}
 
 		[HttpPost("addMovie")]
-		public async Task Add([FromBody] AddMovie request)
+		public async Task<IActionResult> Add([FromBody] AddMovie request)
 		{
 			await _movieRepository.Add(request);
+			return Ok();
 		}
 
 		[HttpPost("search")]

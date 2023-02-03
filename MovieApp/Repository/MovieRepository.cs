@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MovieApp.Db;
 using MovieApp.Models;
 using MovieApp.Models.Requests;
@@ -31,6 +32,18 @@ namespace MovieApp.Repository
 			entity.Director = request.Director;
 			entity.Status = Models.Enums.MovieStatus.Active;
 			entity.MovieCreatedYear = request.ReleaseYear;
+			if (request.Title.IsNullOrEmpty())
+			{
+				throw new ArgumentException("Title Can not be Empty bro!");
+			}
+			if (request.Director.IsNullOrEmpty())
+			{
+				throw new ArgumentException("Director Can not be Empty bro!");
+			}
+			if (request.ReleaseYear.Year > 1895)
+			{
+				throw new ArgumentException("Release year must be at least 1895");
+			}
 
 			await _db.Movies.AddAsync(entity);
 			await _db.SaveChangesAsync();
@@ -57,7 +70,7 @@ namespace MovieApp.Repository
 				.Take(pageSize)
 				.ToList();
 
-			return entity;
+			return  entity;
 		}
 
 		public async Task UpdateAsync(UpdateMovie request)
