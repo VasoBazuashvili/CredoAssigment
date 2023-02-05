@@ -13,6 +13,7 @@ namespace StudentAPI.Db.Mapping
 			builder.Property(t => t.LastName).HasMaxLength(200).IsRequired();
 			builder.Property(t => t.IdNumber).HasMaxLength(11).IsRequired();
 			builder.Property(t => t.Course).IsRequired();
+			builder.Property(t => t.GPA).IsRequired();
 		}
 	}
 }

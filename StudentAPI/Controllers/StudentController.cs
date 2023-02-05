@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentAPI.Db;
+using StudentAPI.Db.Entities;
 using StudentAPI.Models.Requests;
 using StudentAPI.Repositories;
+using StudentAPI.Services;
 
 namespace StudentAPI.Controllers
 {
@@ -9,17 +12,21 @@ namespace StudentAPI.Controllers
 	[ApiController]
 	public class StudentController : ControllerBase
 	{
-		private readonly IGPARepository _gpaRepository;
 		private readonly IStudentRepository _studentRepository;
 		private readonly IGradeRepository _gradeRepository;
-		
+		private readonly ICalculateGpaService _calculateGpaService;
+		private readonly StudentDbContext _db;
 
-		public StudentController(IStudentRepository studentRepository, IGradeRepository gradeRepository, IGPARepository gpaRepository)
+		public StudentController(
+			IStudentRepository repository,
+			IGradeRepository gradeRepository,
+			ICalculateGpaService calculateGPAService,
+			StudentDbContext db)
 		{
-			_studentRepository = studentRepository;
+			_studentRepository = repository;
 			_gradeRepository = gradeRepository;
-			_gpaRepository = gpaRepository;
-
+			_calculateGpaService = calculateGPAService;
+			_db = db;
 		}
 
 		[HttpPost("register")]
@@ -28,6 +35,7 @@ namespace StudentAPI.Controllers
 			await _studentRepository.AddStudentAsync(studentRequest);
 			return Ok();
 		}
+
 		[HttpPost("add-student-grades")]
 		public async Task<IActionResult> AddStundetGrade(AddStudentGradeRequest request)
 		{
@@ -41,11 +49,28 @@ namespace StudentAPI.Controllers
 			return Ok();
 		}
 
-		[HttpGet("calculate-student-gpa")]
-		public async Task<IActionResult> GPACalc(int id)
+		[HttpGet("calculate-gpa")]
+		public async Task<IActionResult> CalculateStudentGPA(int id)
 		{
-			var gpa = await _gpaRepository.CalculateGPA(id);
+			var gpa = await _calculateGpaService.CalculateGPA(id);
+
 			return Ok(gpa);
+		}
+
+		[HttpGet("top-10-student-by-gpa")]
+		public  ActionResult<IEnumerable<Students>> Top10Student()
+		{
+			var top10Student = _db.Students
+				.OrderByDescending(x => x.GPA)
+				.Take(10);
+			return Ok(top10Student);
+		}
+
+		[HttpPut("{id}")]
+		public async Task<IActionResult> UpdateStudentGPA(int id)
+		{
+			await _calculateGpaService.UpdateStudentGPA(id);
+			return NoContent();
 		}
 
 	}

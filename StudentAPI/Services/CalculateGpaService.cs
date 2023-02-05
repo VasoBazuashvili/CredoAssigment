@@ -1,30 +1,32 @@
 ﻿using StudentAPI.Db;
-using StudentAPI.Models.Requests;
 
-namespace StudentAPI.Repositories
+namespace StudentAPI.Services
 {
-	public interface IGPARepository
+	public interface ICalculateGpaService
 	{
 		Task<double> CalculateGPA(int id);
-		Task SaveChangesAsync();
-
+		Task UpdateStudentGPA(int studentId);
 	}
-	public class GPARepository : IGPARepository
+	public class CalculateGpaService : ICalculateGpaService
 	{
 		private readonly StudentDbContext _db;
-		public GPARepository(StudentDbContext db) 
+
+		public CalculateGpaService(StudentDbContext db)
 		{
-			_db= db;
+			_db = db;
 		}
+
 		public async Task<double> CalculateGPA(int id)
 		{
 			var student = await _db.Students.FindAsync(id);
+
 			if (student == null)
 			{
 				throw new ArgumentException("student not found");
 			}
 
 			var studentGrades = _db.Grades.Where(g => g.StudentId == id);
+
 			if (!studentGrades.Any())
 			{
 				throw new ArgumentException("student's grade not found");
@@ -32,9 +34,11 @@ namespace StudentAPI.Repositories
 
 			double totalCredits = 0;
 			double total = 0;
+
 			foreach (var grade in studentGrades)
 			{
 				var subject = await _db.Subjects.FindAsync(grade.SubjectId);
+
 				if (subject == null)
 				{
 					throw new ArgumentException("Subject grade not found");
@@ -66,11 +70,17 @@ namespace StudentAPI.Repositories
 					totalCredits += subject.Credits;
 				}
 			}
-			return total / totalCredits;
+
+			student.GPA = total / totalCredits;
+			await _db.SaveChangesAsync();
+			return student.GPA;
 		}
 
-		public async Task SaveChangesAsync()
+		public async Task UpdateStudentGPA(int studentId)
 		{
+			var gpa = await CalculateGPA(studentId);
+			var student = await _db.Students.FindAsync(studentId);
+			student!.GPA = gpa;
 			await _db.SaveChangesAsync();
 		}
 	}
