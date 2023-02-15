@@ -1,12 +1,19 @@
-﻿using TodoApp.Db;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using TodoApp.Db;
 using TodoApp.Db.Entities;
+using TodoApp.Models.Requests;
 
 namespace TodoApp.Repositories
 {
 	public interface ITodoRepository
 	{
 		Task InsertAsync(int userId, string title, string description, DateTime deadline);
+		void InsertAsync(TodoStatusEntity addTodoStatus);
 		Task SaveChangesAsync();
+		Task<IEnumerable<TodoEntity>> SearchAsync(int userId, string title);
+		Task<bool> UpdateAsync(int id, UpdateTodoRequest request);
+		Task ChangeStatusOfTodo(ChangeStatusOfTodoRequest request);
 	}
 	public class TodoRepository : ITodoRepository
 	{
@@ -49,6 +56,51 @@ namespace TodoApp.Repositories
 
 		public async Task SaveChangesAsync()
 		{
+			await _db.SaveChangesAsync();
+		}
+
+		public void InsertAsync(TodoStatusEntity addTodoStatus)
+		{
+			var entity = new TodoStatusEntity();
+			addTodoStatus.Name = addTodoStatus.Name;
+			entity.Name = addTodoStatus.Name;
+			_db.AddAsync(entity);
+		}
+
+		public async Task<IEnumerable<TodoEntity>> SearchAsync(int userId, string title)
+		{
+			return await _db.Todos
+				.Where(t => t.UserId == 1)
+				.Where(t => t.Title.Contains(title))
+				.OrderBy(t => t.Deadline)
+				.ToListAsync();
+		}
+		public async Task<bool> UpdateAsync(int id, UpdateTodoRequest request)
+		{
+			var todo = await _db.Todos.FindAsync(id);
+
+			if (todo == null)
+			{
+				return false;
+			}
+
+			todo.Title = request.Title;
+			todo.Description = request.Description;
+			todo.Deadline = request.DeadLine;
+
+			await _db.SaveChangesAsync();
+
+			return true;
+		}
+
+		public async Task ChangeStatusOfTodo(ChangeStatusOfTodoRequest request)
+		{
+			var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == request.TodoId);
+			if (todo == null)
+			{
+				throw new Exception("Could not find Todo");
+			}
+			todo.Status = request.NewStatus;
 			await _db.SaveChangesAsync();
 		}
 	}

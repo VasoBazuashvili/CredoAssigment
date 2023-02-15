@@ -17,12 +17,12 @@ namespace TodoApp.Auth
 
 		public string Generate(string userId)
 		{
-			var claims = new List<Claim>
-		{
-			new Claim(JwtRegisteredClaimNames.Sub, userId),
-			new Claim(ClaimTypes.Role, "api-user"),
-			new Claim("test type", "test value")
-		};
+				var claims = new List<Claim>
+			{
+				new Claim(JwtRegisteredClaimNames.Sub, userId),
+				new Claim(ClaimTypes.Role, "api-user"),
+				new Claim("test type", "test value")
+			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecrectKey));
 			var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
