@@ -13,7 +13,7 @@ namespace TodoApp.Repositories
 		Task SaveChangesAsync();
 		Task<IEnumerable<TodoEntity>> SearchAsync(int userId, string title);
 		Task<bool> UpdateAsync(int id, UpdateTodoRequest request);
-		Task ChangeStatusOfTodo(ChangeStatusOfTodoRequest request);
+		Task ChangeStatus(ChangeStatusRequest request);
 	}
 	public class TodoRepository : ITodoRepository
 	{
@@ -93,7 +93,7 @@ namespace TodoApp.Repositories
 			return true;
 		}
 
-		public async Task ChangeStatusOfTodo(ChangeStatusOfTodoRequest request)
+		public async Task ChangeStatus(ChangeStatusRequest request)
 		{
 			var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == request.TodoId);
 			if (todo == null)

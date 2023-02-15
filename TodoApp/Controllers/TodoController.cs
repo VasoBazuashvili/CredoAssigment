@@ -38,12 +38,7 @@ namespace TodoApp.Controllers
 			await _todoRepository.SaveChangesAsync();
 			return Ok();
 		}
-		[HttpGet("add-todo-status")]
-		public async Task<IActionResult> AddTodoStatus(AddTodoStatusRequest request)
-		{
-			await _todoRepository.SaveChangesAsync();
-			return Ok();
-		}
+
 		// list/search - Get user todo list / Search
 		[HttpPost("search")]
 		public async Task<IActionResult> Search([FromBody] SearchTodoRequest request)
@@ -78,14 +73,15 @@ namespace TodoApp.Controllers
 
 			return Ok();
 		}
+
 		// change-status - Change todo status
 		[HttpGet("change-status")]
-		public async Task<OkResult> ChangeStatusOfTodo(ChangeStatusOfTodoRequest request)
+		public async Task<OkResult> ChangeStatus(ChangeStatusRequest request)
 		{
-			await _todoRepository.ChangeStatusOfTodo(request);
+			await _todoRepository.ChangeStatus(request);
 			return Ok();
 		}
 	}
 
-	
+
 }

@@ -2,7 +2,7 @@
 
 namespace TodoApp.Models.Requests
 {
-	public class ChangeStatusOfTodoRequest
+	public class ChangeStatusRequest
 	{
 		public int TodoId { get; set; }
 		public TodoStatus NewStatus { get; set; }
