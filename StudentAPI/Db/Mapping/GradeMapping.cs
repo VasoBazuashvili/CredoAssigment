@@ -12,6 +12,7 @@ namespace StudentAPI.Db.Mapping
 			builder.Property(x => x.StudentId).IsRequired();
 			builder.Property(x=>x.SubjectId).IsRequired();
 			builder.Property(x=>x.Score).IsRequired();
+			builder.HasOne(x => x.Subject).WithMany().HasForeignKey(x=>x.SubjectId);
 		}
 	}
 }

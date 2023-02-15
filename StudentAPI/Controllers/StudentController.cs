@@ -14,18 +14,18 @@ namespace StudentAPI.Controllers
 	{
 		private readonly IStudentRepository _studentRepository;
 		private readonly IGradeRepository _gradeRepository;
-		private readonly ICalculateGpaService _calculateGpaService;
+		private readonly ICalculateGPAService _calculateGPAService;
 		private readonly StudentDbContext _db;
 
 		public StudentController(
 			IStudentRepository repository,
 			IGradeRepository gradeRepository,
-			ICalculateGpaService calculateGPAService,
+			ICalculateGPAService calculateGPAService,
 			StudentDbContext db)
 		{
 			_studentRepository = repository;
 			_gradeRepository = gradeRepository;
-			_calculateGpaService = calculateGPAService;
+			_calculateGPAService = calculateGPAService;
 			_db = db;
 		}
 
@@ -40,6 +40,9 @@ namespace StudentAPI.Controllers
 		public async Task<IActionResult> AddStundetGrade(AddStudentGradeRequest request)
 		{
 			await _gradeRepository.Add(request);
+			var studentGrades = await _gradeRepository.GetStudentGradesAsync(request.StudentId);
+			var gpa = _calculateGPAService.CalculateGPA(studentGrades);
+			await _gradeRepository.UpdateStudentGPA(request.StudentId,gpa);
 			return Ok();
 		}
 		[HttpGet("get-student-grades")]
@@ -49,13 +52,7 @@ namespace StudentAPI.Controllers
 			return Ok();
 		}
 
-		[HttpGet("calculate-gpa")]
-		public async Task<IActionResult> CalculateStudentGPA(int id)
-		{
-			var gpa = await _calculateGpaService.CalculateGPA(id);
-
-			return Ok(gpa);
-		}
+		
 
 		[HttpGet("top-10-student-by-gpa")]
 		public  ActionResult<IEnumerable<Students>> Top10Student()
@@ -64,13 +61,6 @@ namespace StudentAPI.Controllers
 				.OrderByDescending(x => x.GPA)
 				.Take(10);
 			return Ok(top10Student);
-		}
-
-		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateStudentGPA(int id)
-		{
-			await _calculateGpaService.UpdateStudentGPA(id);
-			return NoContent();
 		}
 
 	}

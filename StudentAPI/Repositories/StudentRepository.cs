@@ -2,6 +2,7 @@
 using StudentAPI.Db.Entities;
 using StudentAPI.Models.Requests;
 
+
 namespace StudentAPI.Repositories
 {
 	public interface IStudentRepository
@@ -11,8 +12,10 @@ namespace StudentAPI.Repositories
 	public class StudentRepository : IStudentRepository
 	{
 		private readonly StudentDbContext _db;
+		
 		public StudentRepository(StudentDbContext db) 
 		{
+			
 			_db= db;
 		}
 		public async Task<int> AddStudentAsync(RegisterStudentRequest request)
@@ -27,6 +30,6 @@ namespace StudentAPI.Repositories
 			await _db.SaveChangesAsync();
 			return student.Id;
 		}
-		
+
 	}
 }

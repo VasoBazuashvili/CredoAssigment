@@ -8,5 +8,6 @@ namespace StudentAPI.Db.Entities
 		public int SubjectId { get; set; }
 		public int StudentId { get; set; }
 		public int Score { get; set;}
+		public Subjects Subject { get; set; }
 	}
 }
