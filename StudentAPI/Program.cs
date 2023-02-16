@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentAPI.Db;
 using StudentAPI.Repositories;
-
+using StudentAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,7 @@ builder.Services.AddDbContext<StudentDbContext>(options => options.UseSqlServer(
 builder.Services.AddTransient<IStudentRepository,StudentRepository>();
 builder.Services.AddTransient<ISubjectRepository,SubjectRepository>();
 builder.Services.AddTransient<IGradeRepository,GradeRepository>();
-//builder.Services.AddTransient<ICalculateGpaService, CalculateGpaService>();
+builder.Services.AddTransient<ICalculateGPAService,CalculateGPAService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
