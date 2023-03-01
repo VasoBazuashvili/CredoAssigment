@@ -45,7 +45,7 @@ namespace RSSFeed.Migrations
                     b.Property<DateTimeOffset>("PublishedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Summery")
+                    b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tags")
@@ -68,7 +68,6 @@ namespace RSSFeed.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
